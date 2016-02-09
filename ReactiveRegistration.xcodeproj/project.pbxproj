@@ -11,6 +11,8 @@
 		377C452F1C69E20B0067CBC8 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C452D1C69E20B0067CBC8 /* UIKitExtensions.swift */; };
 		377C45311C69FC4A0067CBC8 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C45301C69FC4A0067CBC8 /* SummaryViewController.swift */; };
 		377C45331C69FC690067CBC8 /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C45321C69FC690067CBC8 /* SummaryViewModel.swift */; };
+		377C45361C6A3D4D0067CBC8 /* FakeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C45341C6A3D4D0067CBC8 /* FakeAPIService.swift */; };
+		377C45371C6A3D4D0067CBC8 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C45351C6A3D4D0067CBC8 /* StringExtension.swift */; };
 		37DD13021C695CBF008F7826 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DD13011C695CBF008F7826 /* AppDelegate.swift */; };
 		37DD13071C695CBF008F7826 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37DD13051C695CBF008F7826 /* Main.storyboard */; };
 		37DD13091C695CBF008F7826 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37DD13081C695CBF008F7826 /* Assets.xcassets */; };
@@ -26,6 +28,8 @@
 		377C452D1C69E20B0067CBC8 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		377C45301C69FC4A0067CBC8 /* SummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		377C45321C69FC690067CBC8 /* SummaryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
+		377C45341C6A3D4D0067CBC8 /* FakeAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeAPIService.swift; sourceTree = "<group>"; };
+		377C45351C6A3D4D0067CBC8 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		37DD12FE1C695CBF008F7826 /* ReactiveRegistration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactiveRegistration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DD13011C695CBF008F7826 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37DD13061C695CBF008F7826 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,13 +102,15 @@
 			isa = PBXGroup;
 			children = (
 				377C452B1C69E20B0067CBC8 /* ReactiveUtils */,
-				37DD13011C695CBF008F7826 /* AppDelegate.swift */,
 				37DD13081C695CBF008F7826 /* Assets.xcassets */,
 				37DD130D1C695CBF008F7826 /* Info.plist */,
 				37DD130A1C695CBF008F7826 /* LaunchScreen.storyboard */,
 				37DD13051C695CBF008F7826 /* Main.storyboard */,
+				37DD13011C695CBF008F7826 /* AppDelegate.swift */,
+				377C45341C6A3D4D0067CBC8 /* FakeAPIService.swift */,
 				37DD13131C6968FF008F7826 /* RegistrationViewController.swift */,
 				37DD13151C69691D008F7826 /* RegistrationViewModel.swift */,
+				377C45351C6A3D4D0067CBC8 /* StringExtension.swift */,
 				377C45301C69FC4A0067CBC8 /* SummaryViewController.swift */,
 				377C45321C69FC690067CBC8 /* SummaryViewModel.swift */,
 			);
@@ -234,9 +240,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				377C452E1C69E20B0067CBC8 /* RACHelpers.swift in Sources */,
+				377C45361C6A3D4D0067CBC8 /* FakeAPIService.swift in Sources */,
 				37DD13141C6968FF008F7826 /* RegistrationViewController.swift in Sources */,
 				37DD13161C69691D008F7826 /* RegistrationViewModel.swift in Sources */,
 				37DD13021C695CBF008F7826 /* AppDelegate.swift in Sources */,
+				377C45371C6A3D4D0067CBC8 /* StringExtension.swift in Sources */,
 				377C45331C69FC690067CBC8 /* SummaryViewModel.swift in Sources */,
 				377C452F1C69E20B0067CBC8 /* UIKitExtensions.swift in Sources */,
 				377C45311C69FC4A0067CBC8 /* SummaryViewController.swift in Sources */,

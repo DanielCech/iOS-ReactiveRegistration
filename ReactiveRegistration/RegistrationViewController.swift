@@ -18,6 +18,7 @@ class RegistrationViewController: UITableViewController {
     @IBOutlet weak var creditCardTextField: UITextField!
     @IBOutlet weak var cardStatusLabel: UILabel!
     @IBOutlet weak var verifyCardButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var registerButton: UIButton!
     
     var viewModel: RegistrationViewModel!
@@ -61,6 +62,33 @@ class RegistrationViewController: UITableViewController {
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
         }
+        
+        viewModel.cardStatus.producer.startWithNext { (status) -> () in
+            switch status {
+                
+            case .NotVerified:
+                self.cardStatusLabel.text = "Card has not been verified yet"
+                self.activityIndicator.hidden = true
+                self.verifyCardButton.hidden = false
+                
+            case .Verifying:
+                self.cardStatusLabel.text = "Card is currently being verified"
+                self.activityIndicator.hidden = false
+                self.verifyCardButton.hidden = true
+            
+            case .Verified:
+                self.cardStatusLabel.text = "Card is verified"
+                self.activityIndicator.hidden = true
+                self.verifyCardButton.hidden = true
+                
+            case .Denied:
+                self.cardStatusLabel.text = "Card is denied"
+                self.activityIndicator.hidden = true
+                self.verifyCardButton.hidden = false
+                
+            }
+            
+        }
     }
     
     
@@ -103,4 +131,7 @@ class RegistrationViewController: UITableViewController {
         performSegueWithIdentifier("ShowSummary", sender: self)
     }
 
+    @IBAction func verifyCardNumber(sender: AnyObject) {
+        viewModel.verifyCardNumber()
+    }
 }

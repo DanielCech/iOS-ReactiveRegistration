@@ -192,12 +192,20 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MFp-LI-7wW">
                                                     <rect key="frame" x="552" y="7" width="40" height="30"/>
                                                     <state key="normal" title="Verify"/>
+                                                    <connections>
+                                                        <action selector="verifyCardNumber:" destination="qeY-hG-ktF" eventType="touchUpInside" id="HBl-Ws-z3X"/>
+                                                    </connections>
                                                 </button>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ksP-Nk-1LT">
+                                                    <rect key="frame" x="562" y="11" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="UuQ-Tp-8Yp" firstAttribute="leading" secondItem="4db-xY-JAr" secondAttribute="leadingMargin" id="M9s-lA-xgU"/>
                                                 <constraint firstItem="MFp-LI-7wW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UuQ-Tp-8Yp" secondAttribute="trailing" constant="10" id="P4j-2W-kDa"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ksP-Nk-1LT" secondAttribute="trailing" constant="10" id="Qgi-UK-Lb6"/>
                                                 <constraint firstItem="MFp-LI-7wW" firstAttribute="centerY" secondItem="4db-xY-JAr" secondAttribute="centerY" id="hYV-ez-dEL"/>
+                                                <constraint firstItem="ksP-Nk-1LT" firstAttribute="centerY" secondItem="4db-xY-JAr" secondAttribute="centerY" id="lrR-2y-qGV"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="MFp-LI-7wW" secondAttribute="trailing" id="njs-8p-4a1"/>
                                                 <constraint firstItem="UuQ-Tp-8Yp" firstAttribute="centerY" secondItem="4db-xY-JAr" secondAttribute="centerY" id="vOv-cZ-Mh9"/>
                                             </constraints>
@@ -213,6 +221,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Registration" id="5LD-qf-0Gx"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="ksP-Nk-1LT" id="O59-xX-E22"/>
                         <outlet property="cardStatusLabel" destination="UuQ-Tp-8Yp" id="Nc0-in-feD"/>
                         <outlet property="creditCardTextField" destination="lL0-SC-Z5j" id="GvT-UR-sn7"/>
                         <outlet property="emailTextField" destination="m0D-n4-7J7" id="d2n-dP-Gse"/>

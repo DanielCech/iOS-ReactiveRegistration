@@ -10,16 +10,6 @@
 //import UIKit
 import ReactiveCocoa
 
-func isValidEmail(text: String) -> Bool {
-    do {
-        let regex = try NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}", options: .CaseInsensitive)
-        return regex.firstMatchInString(text, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, text.characters.count)) != nil
-    } catch {
-        return false
-    }
-}
-
-
 
 class RegistrationViewModel: NSObject {
 
@@ -46,10 +36,14 @@ class RegistrationViewModel: NSObject {
     
     func initBindings()
     {
+        creditCardNumber.producer.startWithNext { _ in
+            self.cardStatus.value = .NotVerified
+        }
+        
         correctEmailProducer =
             email.producer
                 .map({ (emailText) -> Bool in
-                    isValidEmail(emailText)
+                    emailText.isValidEmail()
                 })
         
         
@@ -79,6 +73,18 @@ class RegistrationViewModel: NSObject {
                 return email && password && card
             })
 
+    }
+    
+    
+    func verifyCardNumber()
+    {
+        cardStatus.value = .Verifying
+        
+        FakeAPIService.sharedInstance.validateCreditCardNumber(creditCardNumber.value)
+        .startWithNext { valid in
+            
+            self.cardStatus.value = valid ? .Verified : .Denied
+        }
     }
     
     
