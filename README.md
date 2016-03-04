@@ -1,3 +1,3 @@
 # iOS-ReactiveRegistration
 
-Demo of ReactiveCocoa 4 & MVVM
+Sample of Reactive Cocoa 4 & MVVM
