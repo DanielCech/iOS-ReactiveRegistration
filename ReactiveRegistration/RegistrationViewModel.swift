@@ -8,16 +8,16 @@
 
 
 //import UIKit
-import ReactiveCocoa
+import ReactiveSwift
 
 
 class RegistrationViewModel: NSObject {
 
     enum CardStatus {
-        case NotVerified
-        case Verifying
-        case Verified
-        case Denied
+        case notVerified
+        case verifying
+        case verified
+        case denied
     }
     
     
@@ -26,7 +26,7 @@ class RegistrationViewModel: NSObject {
     var passwordAgain = MutableProperty<String>("")
     var useCreditCard = MutableProperty<Bool>(false)
     var creditCardNumber = MutableProperty<String>("")
-    var cardStatus = MutableProperty<CardStatus>(.NotVerified)
+    var cardStatus = MutableProperty<CardStatus>(.notVerified)
  
     var correctEmailProducer: SignalProducer<Bool, NoError>!
     var correctPasswordProducer: SignalProducer<Bool, NoError>!
@@ -36,8 +36,8 @@ class RegistrationViewModel: NSObject {
     
     func initBindings()
     {
-        creditCardNumber.producer.startWithNext { _ in
-            self.cardStatus.value = .NotVerified
+        creditCardNumber.producer.startWithValues { _ in
+            self.cardStatus.value = .notVerified
         }
         
         correctEmailProducer =
@@ -48,19 +48,19 @@ class RegistrationViewModel: NSObject {
         
         
         correctPasswordProducer =
-            combineLatest(password.producer, passwordAgain.producer)
+            SignalProducer.combineLatest(password.producer, passwordAgain.producer)
                 .map { (passwordText, passwordAgainText) -> Bool in
                     return (passwordText.characters.count > 5) && (passwordText == passwordAgainText)
-        }
+                }
         
         
         correctCreditCardProducer =
-            combineLatest(useCreditCard.producer, cardStatus.producer)
+            SignalProducer.combineLatest(useCreditCard.producer, cardStatus.producer)
                 .map({ (useCard, cardStatus) -> Bool in
                     if !useCard {
                         return true
                     }
-                    else if cardStatus == .Verified {
+                    else if cardStatus == .verified {
                         return true
                     }
                     
@@ -68,7 +68,7 @@ class RegistrationViewModel: NSObject {
                 })
         
         correctInputProducer =
-            combineLatest(correctEmailProducer, correctPasswordProducer, correctCreditCardProducer)
+            SignalProducer.combineLatest(correctEmailProducer, correctPasswordProducer, correctCreditCardProducer)
             .map({ (email, password, card) -> Bool in
                 return email && password && card
             })
@@ -78,12 +78,12 @@ class RegistrationViewModel: NSObject {
     
     func verifyCardNumber()
     {
-        cardStatus.value = .Verifying
+        cardStatus.value = .verifying
         
         FakeAPIService.sharedInstance.validateCreditCardNumber(creditCardNumber.value)
-        .startWithNext { valid in
+        .startWithValues { valid in
             
-            self.cardStatus.value = valid ? .Verified : .Denied
+            self.cardStatus.value = valid ? .verified : .denied
         }
     }
     

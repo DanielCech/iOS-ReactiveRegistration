@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ReactiveSwift
 import ReactiveCocoa
 
 class RegistrationViewController: UITableViewController {
@@ -40,51 +41,59 @@ class RegistrationViewController: UITableViewController {
     
     func initViewModelBindings()
     {
-        viewModel.email = emailTextField.rac_text
-        viewModel.password = passwordTextField.rac_text
-        viewModel.passwordAgain = passwordAgainTextField.rac_text
-        viewModel.useCreditCard = useCreditCardSwitch.rac_on
-        viewModel.creditCardNumber = creditCardTextField.rac_text
+        emailTextField.reactive.continuousTextValues.skipNil().observeValues { email in
+            print(email)
+        }
+        
+        viewModel.email <~ emailTextField.reactive.continuousTextValues.skipNil()
+        viewModel.password <~ passwordTextField.reactive.continuousTextValues.skipNil()
+        viewModel.passwordAgain <~ passwordAgainTextField.reactive.continuousTextValues.skipNil()
+        viewModel.useCreditCard <~ useCreditCardSwitch.reactive.isOnValues
+        viewModel.creditCardNumber <~ creditCardTextField.reactive.continuousTextValues.skipNil()
         
 //        cardStatusLabel.rac_text <~ viewModel.cardStatus
 
         viewModel.initBindings()
         
-        registerButton.rac_enabled <~ viewModel.correctInputProducer
+        registerButton.reactive.isEnabled <~ viewModel.correctInputProducer
         
-        viewModel.correctPasswordProducer.startWithNext { (correct) -> () in
-            let backgroundColor = correct ? UIColor.lightGrayColor() : UIColor.redColor()
+        viewModel.correctEmailProducer.startWithValues { (correct) in
+            self.emailTextField.textColor = correct ? UIColor.blue : UIColor.gray
+        }
+        
+        viewModel.correctPasswordProducer.startWithValues { (correct) -> () in
+            let backgroundColor = correct ? UIColor.lightGray : UIColor.red
             self.passwordTextField.textColor = backgroundColor
             self.passwordAgainTextField.textColor = backgroundColor
         }
         
-        viewModel.useCreditCard.producer.startWithNext { (useCard) -> () in
+        viewModel.useCreditCard.producer.startWithValues { (useCard) -> () in
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
         }
         
-        viewModel.cardStatus.producer.startWithNext { (status) -> () in
+        viewModel.cardStatus.producer.startWithValues { (status) -> () in
             switch status {
                 
-            case .NotVerified:
+            case .notVerified:
                 self.cardStatusLabel.text = "Card has not been verified yet"
-                self.activityIndicator.hidden = true
-                self.verifyCardButton.hidden = false
+                self.activityIndicator.isHidden = true
+                self.verifyCardButton.isHidden = false
                 
-            case .Verifying:
+            case .verifying:
                 self.cardStatusLabel.text = "Card is currently being verified"
-                self.activityIndicator.hidden = false
-                self.verifyCardButton.hidden = true
+                self.activityIndicator.isHidden = false
+                self.verifyCardButton.isHidden = true
             
-            case .Verified:
+            case .verified:
                 self.cardStatusLabel.text = "Card is verified"
-                self.activityIndicator.hidden = true
-                self.verifyCardButton.hidden = true
+                self.activityIndicator.isHidden = true
+                self.verifyCardButton.isHidden = true
                 
-            case .Denied:
+            case .denied:
                 self.cardStatusLabel.text = "Card is denied"
-                self.activityIndicator.hidden = true
-                self.verifyCardButton.hidden = false
+                self.activityIndicator.isHidden = true
+                self.verifyCardButton.isHidden = false
                 
             }
             
@@ -97,7 +106,7 @@ class RegistrationViewController: UITableViewController {
     // MARK: - TableView
     
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath.row == 4) || (indexPath.row == 5) {
             if viewModel.useCreditCard.value {
                 return 44
@@ -114,11 +123,11 @@ class RegistrationViewController: UITableViewController {
     ////////////////////////////////////////////////////////////////
     // MARK: - Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         
         if segue.identifier == "ShowSummary" {
-            let summaryController = segue.destinationViewController as! SummaryViewController
+            let summaryController = segue.destination as! SummaryViewController
             summaryController.viewModel = viewModel.createSummaryViewModel()
         }
     }
@@ -127,11 +136,11 @@ class RegistrationViewController: UITableViewController {
     ////////////////////////////////////////////////////////////////
     // MARK: - Actions
     
-    @IBAction func showSummary(sender: AnyObject) {
-        performSegueWithIdentifier("ShowSummary", sender: self)
+    @IBAction func showSummary(_ sender: AnyObject) {
+        performSegue(withIdentifier: "ShowSummary", sender: self)
     }
 
-    @IBAction func verifyCardNumber(sender: AnyObject) {
+    @IBAction func verifyCardNumber(_ sender: AnyObject) {
         viewModel.verifyCardNumber()
     }
 }

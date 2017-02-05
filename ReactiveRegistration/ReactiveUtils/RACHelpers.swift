@@ -6,10 +6,12 @@
 //  Copyright (c) 2015 steffendsommer. All rights reserved.
 //
 
-import ReactiveCocoa
+import ReactiveSwift
+import enum Result.NoError
 
+public typealias NoError = Result.NoError
 
-extension SignalProducer where Value: OptionalType {
+extension SignalProducer where Value: OptionalProtocol {
 	public func ignoreError() -> SignalProducer<Value, NoError> {
 		return flatMapError { _ in
             SignalProducer<Value, NoError>.empty
@@ -17,6 +19,7 @@ extension SignalProducer where Value: OptionalType {
 	}
 }
 
-public func merge<T, E>(signals: [SignalProducer<T, E>]) -> SignalProducer<T, E> {
-    return SignalProducer<SignalProducer<T, E>, E>(values: signals).flatten(.Merge)
+public func merge<T, E>(_ signals: [SignalProducer<T, E>]) -> SignalProducer<T, E> {
+    return SignalProducer<SignalProducer<T, E>, E>(signals).flatten(.merge)
 }
+

@@ -6,16 +6,13 @@
 //  Copyright © 2016 Dan Cech. All rights reserved.
 //
 
-import ReactiveCocoa
+import ReactiveSwift
 
 
-public func delay(delay: Double, closure:()->()) {
-    dispatch_after(
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(delay * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(), closure)
+public func delay(_ delay: Double, closure: @escaping ()->()) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+        closure()
+    }
 }
 
 
@@ -23,12 +20,12 @@ class FakeAPIService {
 
     static let sharedInstance = FakeAPIService()
     
-    func validateCreditCardNumber(number: String) -> SignalProducer<Bool, NoError>
+    func validateCreditCardNumber(_ number: String) -> SignalProducer<Bool, NoError>
     {
         return SignalProducer { sink, disposable in
             
             delay(2) {
-                sink.sendNext(number == "123456")
+                sink.send(value: number == "123456")
                 sink.sendCompleted()
             }
             

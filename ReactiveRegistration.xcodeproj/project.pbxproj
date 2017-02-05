@@ -124,12 +124,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37DD13101C695CBF008F7826 /* Build configuration list for PBXNativeTarget "ReactiveRegistration" */;
 			buildPhases = (
-				1DC20D27BEE289F08399FE7F /* Check Pods Manifest.lock */,
+				1DC20D27BEE289F08399FE7F /* [CP] Check Pods Manifest.lock */,
 				37DD12FA1C695CBF008F7826 /* Sources */,
 				37DD12FB1C695CBF008F7826 /* Frameworks */,
 				37DD12FC1C695CBF008F7826 /* Resources */,
-				83E292903C30802B7022182B /* Embed Pods Frameworks */,
-				EEDB4B88D76065ED142D7751 /* Copy Pods Resources */,
+				83E292903C30802B7022182B /* [CP] Embed Pods Frameworks */,
+				EEDB4B88D76065ED142D7751 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,6 +152,7 @@
 				TargetAttributes = {
 					37DD12FD1C695CBF008F7826 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -187,29 +188,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1DC20D27BEE289F08399FE7F /* Check Pods Manifest.lock */ = {
+		1DC20D27BEE289F08399FE7F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		83E292903C30802B7022182B /* Embed Pods Frameworks */ = {
+		83E292903C30802B7022182B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,14 +218,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveRegistration/Pods-ReactiveRegistration-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EEDB4B88D76065ED142D7751 /* Copy Pods Resources */ = {
+		EEDB4B88D76065ED142D7751 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,6 +364,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.strv.ReactiveRegistration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -375,6 +377,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.strv.ReactiveRegistration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

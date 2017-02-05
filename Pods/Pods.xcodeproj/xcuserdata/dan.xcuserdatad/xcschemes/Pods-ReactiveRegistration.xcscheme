@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A7AE524EDF28DC371FC5DD7441489A9B"
+               BlueprintIdentifier = "673DBC0293D4528BC961ABDB403C10CC"
                BuildableName = "Pods_ReactiveRegistration.framework"
                BlueprintName = "Pods-ReactiveRegistration"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A7AE524EDF28DC371FC5DD7441489A9B"
+            BlueprintIdentifier = "673DBC0293D4528BC961ABDB403C10CC"
             BuildableName = "Pods_ReactiveRegistration.framework"
             BlueprintName = "Pods-ReactiveRegistration"
             ReferencedContainer = "container:Pods.xcodeproj">

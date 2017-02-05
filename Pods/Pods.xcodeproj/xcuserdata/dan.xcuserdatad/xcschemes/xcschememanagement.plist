@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ReactiveSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Result.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>8A8AD73F47C0AB3EDE024E1690C873A7</key>
+		<key>1A2C55CF4643361ABA8640685B553AB8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A7AE524EDF28DC371FC5DD7441489A9B</key>
+		<key>41B109ADA0AC041CA625B5E7F268293D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA8B6F63E9F6A85A17E9A572E7F71F2B</key>
+		<key>673DBC0293D4528BC961ABDB403C10CC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C4E86928F2FF7CA53F4B2E87E13CAA33</key>
 		<dict>
 			<key>primary</key>
 			<true/>
